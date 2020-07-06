@@ -1,0 +1,156 @@
+body {
+	background-image:url('../img/fundo.jpeg');
+	background-size: 100% 100%;
+}
+ 
+img,
+picture,
+video,
+embed {
+	max-width: 100%;
+	height: 100%;
+}
+
+/* Scroll do navegador */
+::-webkit-scrollbar {
+    width: 12px;
+}
+  
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+
+
+aside {
+	width: 15%;
+	height: 100%;
+	background-color: #222;
+	float: left;
+}
+
+aside .header{
+	width: 100%;
+	color: white;
+	font-size: 12pt;
+	font-family: Arial;
+	padding: 5px;
+}
+.left_menu{
+	width: 99%;
+	height: 30px;
+	margin-bottom: 5px;
+}
+
+.menuIcon {
+	width: 20%;
+	float: left;
+}
+
+.icon{
+	width: 100%;
+	height: 25px;
+	margin-bottom: 5px;
+}
+
+.menuText {
+	float: right;
+	width: 75%;
+}
+
+.btn{
+	width: 100%;
+}
+
+section {
+	height: 100%;
+	width: 85%;
+	overflow: auto;
+}
+
+section .banner {
+	height: 150px;
+	margin-bottom: 0.3em;
+	position: relative;
+}
+
+section .titu {
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	font-size: 36pt;
+	color: black;
+	padding-top: 15px;
+}
+
+section select {
+	margin-bottom: 0.8em;
+}
+
+section .btn-2{
+	background:linear-gradient(to bottom right, Gold, DarkOrange, Tomato, Red, DeepPink, DeepPink);
+	text-decoration:none;
+	color:#fff;
+	float: left;
+	padding:10px 15px;
+	margin:10px 25px;
+	border: 1px solid #fff;
+	border-radius:5px;
+	font-size:20px;
+	top:2px;
+	transition: .5s;
+}
+
+.hidden {
+	display:none;
+}
+
+input {
+	display: block;
+}
+.formulario{	
+	margin-right:5%;
+	margin-left:5%;
+	background-size:10px;
+	height:310px;
+	/*border: 1px solid black;
+	background-color:rgba(0,0,0,0.1);
+	backdrop-filter: blur(10px);*/
+}
+
+input[type=text],[type=number],[type=email],[type=password]{   
+    border-radius:4px;
+    -moz-border-radius:4px;
+    -webkit-border-radius:4px;
+    width:200px;
+	height:22px;
+	margin-bottom:3%;
+}
+
+.estado{
+	border-color: black;
+	 border-radius:4px;
+    -moz-border-radius:4px;
+    -webkit-border-radius:4px;
+    width:200px;
+	height:27px;
+}
+
+input:invalid {
+    border-color: black;
+}
+
+.infoendereco{
+	border: solid black 2px;
+	padding: 2em;
+}
+
+.infopessoa{
+	border: solid black 2px;
+	padding: 2em;
+}
+
+section .table{
+	margin: 0.8em;
+	width: 100%;
+}
