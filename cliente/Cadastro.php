@@ -87,7 +87,7 @@ if(!isset($_SESSION['usuarioId'])AND !isset($_SESSION['usuarioEmail'])AND !isset
 						</div>
 
 						<div class="formulario">
-							<form  name="cadastrarCliente" action="salvaCliente.php" method="post" onSubmit="return validarFormCliente()">
+						<form class="formulario" name="cadastrarCliente" action="salvaCliente.php" method="post" onSubmit="return validarFormCliente()">
 								<div class="infopessoa">
 									<div class="form-row">
 										<div class="col">

@@ -1,9 +1,18 @@
 body {
 	background-image:url('../img/fundo.jpeg');
-	background-size: 100vw 100vh;
+	background-size: 100% 100%;
 }
 
-.formulario{
+.formulario_cliente{
+	width: 90%;
+	border-radius: 15px;
+	border: 1px solid black;
+	padding: 10px;
+    margin: auto;
+    margin-bottom: 2%;
+}
+
+.formulario_endereco{
 	width: 90%;
 	border-radius: 15px;
 	border: 1px solid black;

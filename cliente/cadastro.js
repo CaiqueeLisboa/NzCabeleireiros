@@ -1,19 +1,18 @@
 function validarFormCliente(){
 	var nome = document.cadastrarCliente.nome.value; //recebo o valor do campo nome do formulario "cadastrarCliente"
-	var apelido = document.cadastrarCliente.apelido.value; //recebo o valor do campo apelido do formulario "cadastrarCliente"
 	var email = document.cadastrarCliente.email.value;  //recebo o valor do campo email do formulario "cadastrarCliente"
 	var fixo = document.cadastrarCliente.fixo.value; //recebo o valor do campo fixo do formulario "cadastrarCliente"
 	var celular = document.cadastrarCliente.celular.value; //recebo o valor do campo celular do formulario "cadastrarCliente"
 
   //if para verificar se todos os campos foram preenchidos
-	if(nome == '' || fixo == '' || celular == '' || apelido == '' || email == ''){
+	if(nome == '' || celular == '' || email == ''){
 		//alert que exibe na tela para o usuário
 		alert("Informe todos os campos");
 		//retorno em falso para o formulário não ser enviado para o backend
 		return false;
 	}else{
 		//if para verificar se o usuario não escreveu um telefone inválido
-		if(celular.length >= 12 || fixo.length >= 12 || fixo.length < 8 || celular.length < 9){
+		if(celular.length >= 13 || fixo.length >= 13 || fixo.length < 8 || celular.length < 9){
 			//alert que exibe na tela para o usuário
 			alert("O telefone deve possuir no minimo 8 carateres e no máximo 12 caracteres");
 			//retorno em falso para o formulário não ser enviado para o backend
@@ -42,7 +41,7 @@ function validarFormFuncionario(){
 		return false;
 	}else{
 		//if para verificar se o usuario não escreveu um telefone inválido
-		if(celular.length >= 12 || fixo.length >= 12 || celular.length < 9){
+		if(celular.length >= 13 || fixo.length >= 13 || celular.length < 9){
 			//alert que exibe na tela para o usuário
 			alert("O telefone deve possuir no minimo 8 carateres e no máximo 12 caracteres");
 			//retorno em falso para o formulário não ser enviado para o backend

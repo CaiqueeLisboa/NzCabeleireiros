@@ -64,7 +64,7 @@
 			</script>";
 
 	}else if($id_cliente == ''){
-		$conn->query("INSERT INTO cliente(nome, telefone_fixo, telefone_celular) 
+		$conn->query("INSERT INTO cliente(nome_cliente, telefone_fixo_cliente, telefone_celular_cliente) 
 			VALUES ('$nome', '$fixo', '$celular')");
 
 		$id_cliente = selecionaCliente($nome, $fixo, $celular);
