@@ -118,7 +118,7 @@ input {
 	backdrop-filter: blur(10px);*/
 }
 
-input[type=text],[type=number],[type=email],[type=password]{   
+.formulario input[type=text],[type=number],[type=email],[type=password]{   
     border-radius:4px;
     -moz-border-radius:4px;
     -webkit-border-radius:4px;

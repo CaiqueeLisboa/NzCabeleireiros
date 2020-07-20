@@ -49,104 +49,54 @@ if(!isset($_SESSION['usuarioId'])AND !isset($_SESSION['usuarioEmail'])AND !isset
 					<div id="servico" class="card">
 						<div class="card-body">
 							<div class="card-header"> <b> Grafico de serviços prestados </b> </div>
-							<div id="piechart_service" class="piechart"></div>
+							<div id="piechart_service" class="piechart">
 							<?php
 								include "../conexao.php";							
-								$lista = mysqli_query($conn, "SELECT tipo_servico FROM view_agenda where data_agenda between date_add(current_date(), interval -365 day) and current_date()");
-									$conta_corte = 0;
-									$conta_manicure = 0;
-									$conta_progressiva = 0;
-									$conta_depilacao = 0;
-									while($coluna = mysqli_fetch_array($lista)) {
-										if($coluna['tipo_servico'] == 'Corte'){
-											$conta_corte++;
-										}
-										else if($coluna['tipo_servico'] == 'Manicure'){
-											$conta_manicure++;
-										}
-										else if($coluna['tipo_servico'] == 'progressiva'){
-											$conta_progressiva++;
-										}
-										else{
-											$conta_depilacao++;
-										}									
-									}
 							?>
+							</div>	
 						</div>
 					</div>
 
 					<div id="funcionario" class="card">
 						<div class="card-body">
 							<div class="card-header"> <b> Grafico de funcionários </b> </div>
-							<div id="piechart_funcionario" class="piechart"></div>
+							<div id="piechart_funcionario" class="piechart">
 							<?php
 								include "../conexao.php";							
-								$lista = mysqli_query($conn, "SELECT nome_funcionario FROM view_agenda where data_agenda between date_add(current_date(), interval -365 day) and current_date()");
-									$conta_caique = 0;
-									$conta_nath = 0;
-									$conta_outro = 0;
-
-									while($coluna = mysqli_fetch_array($lista)) {
-										if($coluna['nome_funcionario'] == 'Caique'){
-											$conta_caique++;
-										}
-										else if($coluna['nome_funcionario'] == 'Nath'){
-											$conta_nath++;
-										}
-										else{
-											$conta_outro++;
-										}									
-									}
 							?>
+							</div>
 						</div>
 					</div>
 
 					<div id="status" class="card">
 						<div class="card-body">
 							<div class="card-header"> <b> Grafico de Comparecimento </b> </div>
-							<div id="piechart_status" class="piechart"></div>
+							<div id="piechart_status" class="piechart">
 							<?php
 								include "../conexao.php";							
-								$lista = mysqli_query($conn, "SELECT status_agenda FROM view_agenda where data_agenda between date_add(current_date(), interval -365 day) and current_date()");
-									$conta_compareceu = 0;
-									$conta_pendente = 0;
-									$conta_nao_compareceu = 0;
-
-									while($coluna = mysqli_fetch_array($lista)) {
-										if($coluna['status_agenda'] == 'Compareceu'){
-											$conta_compareceu++;
-										}
-										else if($coluna['status_agenda'] == 'Pendente'){
-											$conta_pendente++;
-										}
-										else{
-											$conta_nao_compareceu++;
-										}									
-									}
 							?>
+							</div>
 						</div>
 					</div>
 				</div>
-				<table class="table table-danger">
+				<table class="table table-danger table-hover">
 					<thead class="thead-dark">
 							<tr>
-								<th>DATA</th>
-								<th>STATUS</th>
+								<th colspan="2">DATA</th>
 								<th>VALOR</th>
 							</tr>
 					</thead>
 							<?php
 							include "../conexao.php";							
-							$lista = mysqli_query($conn, "SELECT data_ganho, status_ganho, valor_ganho FROM ganho where data_ganho between date_add(current_date(), interval -365 day) and current_date()");
+							$lista = mysqli_query($conn, "SELECT data_ganho, status_ganho, valor_ganho FROM ganho where data_ganho between date_add(current_date(), interval -30 day) and current_date() AND status_ganho = 'pago' order by data_ganho");
 								 while($coluna = mysqli_fetch_array($lista)) {
 								 $data = $coluna['data_ganho'];
-								 $status = $coluna['status_ganho'];
+								 $data = date("d/m/Y",strtotime($data));
 								 $valor = $coluna['valor_ganho'];
 
 								echo"
 								<tr>
-									<td>$data</td>
-									<td>$status</td>
+									<td colspan='2'>$data</td>
 									<td>$valor R$</td>
 								</tr>";
 								}
@@ -158,7 +108,7 @@ if(!isset($_SESSION['usuarioId'])AND !isset($_SESSION['usuarioEmail'])AND !isset
 										<th colspan='2'>VALOR TOTAL</th>
 									</tr>
 								</thead>";
-								$lista = mysqli_query($conn, "SELECT view_agenda.nome_funcionario, sum(view_agenda.valor_ganho) AS total_funcionario FROM view_agenda WHERE view_agenda.status_agenda = 'Compareceu' GROUP BY view_agenda.nome_funcionario;");
+								$lista = mysqli_query($conn, "SELECT view_agenda.nome_funcionario, sum(view_agenda.valor_ganho) AS total_funcionario FROM view_agenda WHERE view_agenda.data_agenda between date_add(current_date(), interval -30 day) and CURRENT_DATE() AND view_agenda.status_agenda = 'Compareceu' GROUP BY view_agenda.nome_funcionario;");
 								while($coluna = mysqli_fetch_array($lista)) {
 									$total_funcionario = $coluna['total_funcionario'];
 									$nome_funcionario = $coluna['nome_funcionario'];
@@ -170,7 +120,7 @@ if(!isset($_SESSION['usuarioId'])AND !isset($_SESSION['usuarioEmail'])AND !isset
 									</tr> ";
 								}
 
-								$lista = mysqli_query($conn, "SELECT SUM(valor_ganho) AS total FROM ganho where data_ganho between date_add(current_date(), interval -365 day) and CURRENT_DATE() AND status_ganho = 'pago'");
+								$lista = mysqli_query($conn, "SELECT SUM(valor_ganho) AS total FROM ganho where data_ganho between date_add(current_date(), interval -30 day) and CURRENT_DATE() AND status_ganho = 'pago'");
 								while($coluna = mysqli_fetch_array($lista)) {
 									$total = $coluna['total'];
 								echo"
@@ -187,6 +137,7 @@ if(!isset($_SESSION['usuarioId'])AND !isset($_SESSION['usuarioEmail'])AND !isset
 		</div>
     </body>
 
+	<!-- Gráfico de serviços -->
 	<script type="text/javascript">
 		google.charts.load('current', {'packages':['corechart']});
 		google.charts.setOnLoadCallback(drawChart);
@@ -195,10 +146,15 @@ if(!isset($_SESSION['usuarioId'])AND !isset($_SESSION['usuarioEmail'])AND !isset
 
 			var data = google.visualization.arrayToDataTable([
 			['Serviço', 'vezes que foi feito'],
-			['Corte',     		<?php echo"$conta_corte"?>],
-			['Manicure',     	<?php echo"$conta_manicure"?>],
-			['Progressiva',  	<?php echo"$conta_progressiva"?>],
-			['Depilação', 		<?php echo"$conta_depilacao"?>],
+			<?php 
+			$lista = mysqli_query($conn, "SELECT tipo_servico, COUNT(tipo_servico) as contador FROM view_agenda where data_agenda between date_add(current_date(), interval -30 day) and CURRENT_DATE() GROUP BY tipo_servico");
+			
+			while($coluna = mysqli_fetch_array($lista)) {
+				$tipoServico = $coluna['tipo_servico'];
+				$contaServico = $coluna['contador'];
+
+				echo "['$tipoServico', $contaServico],";
+			}?>
 			]);
 
 			var options = {
@@ -211,6 +167,7 @@ if(!isset($_SESSION['usuarioId'])AND !isset($_SESSION['usuarioEmail'])AND !isset
 		}
 	</script>
 
+	<!-- Gráfico de funcionarios -->
 	<script type="text/javascript">
 		google.charts.load('current', {'packages':['corechart']});
 		google.charts.setOnLoadCallback(drawChart);
@@ -218,9 +175,15 @@ if(!isset($_SESSION['usuarioId'])AND !isset($_SESSION['usuarioEmail'])AND !isset
 		function drawChart() {
 			var data = google.visualization.arrayToDataTable([
 			['Funcionario', 'vezes que trabalhou'],
-			['Caique',     		<?php echo"$conta_caique"?>],
-			['Nath',     		<?php echo"$conta_nath"?>],
-			['Outro',  			<?php echo"$conta_outro"?>],
+			<?php 
+			$lista = mysqli_query($conn, "SELECT nome_funcionario, COUNT(nome_funcionario) as contador FROM view_agenda where data_agenda between date_add(current_date(), interval -30 day) and CURRENT_DATE() GROUP BY nome_funcionario");
+			
+			while($coluna = mysqli_fetch_array($lista)) {
+				$funcionario = $coluna['nome_funcionario'];
+				$contaFuncionario = $coluna['contador'];
+
+				echo "['$funcionario', $contaFuncionario],";
+			}?>
 			]);
 
 			var options = {
@@ -233,6 +196,7 @@ if(!isset($_SESSION['usuarioId'])AND !isset($_SESSION['usuarioEmail'])AND !isset
 			}
 	</script>
 
+	<!-- Gráfico de comparecimento -->
 	<script type="text/javascript">
 		google.charts.load('current', {'packages':['corechart']});
 		google.charts.setOnLoadCallback(drawChart);
@@ -240,9 +204,15 @@ if(!isset($_SESSION['usuarioId'])AND !isset($_SESSION['usuarioEmail'])AND !isset
 		function drawChart() {
 			var data = google.visualization.arrayToDataTable([
 				['Status', '$ de clientes que comparecem'],
-				['Compareceu',     		<?php echo"$conta_compareceu"?>],
-				['Pendente',     		<?php echo"$conta_pendente"?>],
-				['Não Compareceu',  	<?php echo"$conta_nao_compareceu"?>],
+				<?php 
+					$lista = mysqli_query($conn, "SELECT status_agenda, COUNT(status_agenda) as contador FROM view_agenda where data_agenda between date_add(current_date(), interval -30 day) and CURRENT_DATE()GROUP BY status_agenda");
+			
+				while($coluna = mysqli_fetch_array($lista)) {
+					$status = $coluna['status_agenda'];
+					$contaComparecimento = $coluna['contador'];
+
+					echo "['$status', $contaComparecimento],";
+				}?>
 			]);
 			
 			var options = {

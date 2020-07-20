@@ -73,8 +73,7 @@
 								
 				</form>
 				
-				<a href="../divulgacao/divulgacao.html"> Acesso para convidados </a>
-			</div>
+				<!--<a href="../divulgacao/divulgacao.html"> Acesso para convidados </a>-->
 	
 		</div>
 		
