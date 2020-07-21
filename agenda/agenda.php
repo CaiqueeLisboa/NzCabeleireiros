@@ -49,7 +49,7 @@ if(!isset($_SESSION['usuarioId'])AND !isset($_SESSION['usuarioEmail'])AND !isset
 						<img src="../img/iconAgendaDia.png" style="filter:invert(100)" class="icon"> 
 					</div>
 					<div class="menuText">
-						<input type="button" value="Agenda do Dia" onClick="MostrarButton('agenda_dia', 'calendario_mensal', 'Lembrete', 'novo_horario')" class="btn btn-secondary btn-sm"/>
+						<input type="button" value="Agenda do Dia" onClick="MostrarButton('agenda_dia', 'calendario_mensal', 'Lembrete', 'novo_horario')" class="btn btn-danger btn-sm"/>
 					</div>
 				</div>
 				<div class="left_menu">
@@ -57,7 +57,7 @@ if(!isset($_SESSION['usuarioId'])AND !isset($_SESSION['usuarioEmail'])AND !isset
 						<img src="../img/iconAgendaMês.png" style="filter:invert(100)" class="icon"> 
 					</div>
 					<div class="menuText">
-						<input type="button" value="Calendário Mensal" onClick="MostrarButton('calendario_mensal', 'agenda_dia', 'Lembrete', 'novo_horario')" class="btn btn-secondary btn-sm"/>
+						<input type="button" value="Calendário Mensal" onClick="MostrarButton('calendario_mensal', 'agenda_dia', 'Lembrete', 'novo_horario')" class="btn btn-danger btn-sm"/>
 					</div>
 				</div>
 				<div class="left_menu">
@@ -65,7 +65,7 @@ if(!isset($_SESSION['usuarioId'])AND !isset($_SESSION['usuarioEmail'])AND !isset
 						<img src="../img/iconAgendar.png" style="filter:invert(100)" class="icon">
 					</div>
 					<div class="menuText">
-						<input type="button" value="Agendar Novo Horário" onClick="MostrarButton('novo_horario', 'agenda_dia', 'calendario_mensal', 'Lembrete')" class="btn btn-secondary btn-sm"/>
+						<input type="button" value="Agendar Novo Horário" onClick="MostrarButton('novo_horario', 'agenda_dia', 'calendario_mensal', 'Lembrete')" class="btn btn-danger btn-sm"/>
 					</div>
 				</div>
 				<div class="left_menu">
@@ -73,7 +73,7 @@ if(!isset($_SESSION['usuarioId'])AND !isset($_SESSION['usuarioEmail'])AND !isset
 						<img src="../img/iconLembrete.png" style="filter:invert(100)" class="icon"> 
 					</div>
 					<div class="menuText">
-						<input type="button" value="Lembrete" onClick="MostrarButton('Lembrete', 'agenda_dia', 'calendario_mensal', 'novo_horario')" class="btn btn-secondary btn-sm"/>
+						<input type="button" value="Lembrete" onClick="MostrarButton('Lembrete', 'agenda_dia', 'calendario_mensal', 'novo_horario')" class="btn btn-danger btn-sm"/>
 					</div>
 				</div>
 			</aside>
@@ -85,11 +85,11 @@ if(!isset($_SESSION['usuarioId'])AND !isset($_SESSION['usuarioEmail'])AND !isset
 					</div>
 					<form action="agendacontrol.php" method="post">
 						<div class="agenda">
-							<table class="table table-dark">
+							<table class="table table-dark table-hover">
 								<tr>
 									<td>Inicio</td>
 									<td>Fim</td>
-									<td>Nome</td>
+									<td>Cliente</td>
 									<td>Funcionário</td>
 									<td>Serviço</td>
 									<td>Status</td>
@@ -138,12 +138,12 @@ if(!isset($_SESSION['usuarioId'])AND !isset($_SESSION['usuarioEmail'])AND !isset
 					</div>
 					<form action="lembreteControl.php" method="post">
 					<div class="agenda">
-					<table class="table table-dark">
+					<table class="table table-dark table-hover">
 								<tr>
 									<td>Data</td>
 									<td>Inicio</td>
 									<td>Fim</td>
-									<td>Nome</td>
+									<td>Cliente</td>
 									<td>Funcionário</td>
 									<td>Serviço</td>
 									<td>Status</td>
@@ -163,6 +163,7 @@ if(!isset($_SESSION['usuarioId'])AND !isset($_SESSION['usuarioEmail'])AND !isset
 									$status = $coluna['status_agenda'];
 									$preco = $coluna['valor_ganho'];
 									$data = $coluna['data_agenda'];
+									$data = date("d/m/Y",strtotime($data));
 									echo"
 										<tr>
 											<td>$data</td>
@@ -201,7 +202,7 @@ if(!isset($_SESSION['usuarioId'])AND !isset($_SESSION['usuarioEmail'])AND !isset
 								<input name="celular"	type="number" 	require	placeholder="celular" id="celular" class="form-control">
 							</div>
 							<div class="col">
-								<label for="fixo">Telefone Celular</label>
+								<label for="fixo">Telefone Fixo</label>
 								<input name="fixo"		type="number" 	require placeholder="fixo" id="fixo" class="form-control">
 							</div>
 										

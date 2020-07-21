@@ -50,7 +50,7 @@
 	$id_cliente = selecionaCliente($nome, $fixo, $celular);
 	$id_agenda = selecionaAgenda();
 	
-	if($nome == '' || $nome == null || $fixo == '' || $fixo == null || $celular == '' || $celular == null ||
+	if($nome == '' || $nome == null || $celular == '' || $celular == null ||
 		$id_servico == '' || $id_servico == null || $data == '' || $data == null || $hora == '' || 
 		$hora == null || $horaTerm == '' || $horaTerm == null || $id_funcionario == '' || $id_funcionario == null ||
 		$valor == '' || $valor == null){

@@ -12,7 +12,7 @@ function validarFormCliente(){
 		return false;
 	}else{
 		//if para verificar se o usuario não escreveu um telefone inválido
-		if(celular.length >= 13 || fixo.length >= 13 || fixo.length < 8 || celular.length < 9){
+		if(celular.length >= 13 || fixo.length >= 13 || celular.length < 9){
 			//alert que exibe na tela para o usuário
 			alert("O telefone deve possuir no minimo 8 carateres e no máximo 12 caracteres");
 			//retorno em falso para o formulário não ser enviado para o backend
@@ -92,3 +92,7 @@ function completaEndereco(){
 		});
 	});
 }
+
+$(document).ready(function(){
+    $('input#txt_consulta').quicksearch('table#tabela tbody tr');
+});

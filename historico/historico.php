@@ -14,11 +14,15 @@ if(!isset($_SESSION['usuarioId'])AND !isset($_SESSION['usuarioEmail'])AND !isset
         <link rel="stylesheet" href="./historico.css">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.1.1.js"></script>
+		<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.quicksearch/2.3.1/jquery.quicksearch.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
 		<script type="text/javascript" src="../services.js"></script>
-    </head>
+		<script type="text/javascript" src="historico.js"></script>
+    </head>	
     <body>
 		<div class="container-fluid">
 		
@@ -47,7 +51,7 @@ if(!isset($_SESSION['usuarioId'])AND !isset($_SESSION['usuarioEmail'])AND !isset
 						<img src="../img/iconHistoricoMensal.png" style="filter:invert(100)" class="icon"> 
 					</div>
 					<div class="menuText">
-						<input type="button" value="Histórico" onClick="MostrarButton('historico', 'registros_desativados')" class="btn btn-secondary btn-sm"/>
+						<input type="button" value="Histórico" onClick="MostrarButton('historico', 'registros_desativados')" class="btn btn-danger btn-sm"/>
 					</div>
 				</div>
 				<div class="left_menu">
@@ -55,7 +59,7 @@ if(!isset($_SESSION['usuarioId'])AND !isset($_SESSION['usuarioEmail'])AND !isset
 						<img src="../img/iconHistoricoDesativado.png" style="filter:invert(100)" class="icon"> 
 					</div>
 					<div class="menuText">
-						<input type="button" value="Registros Desativados" onClick="MostrarButton('registros_desativados', 'historico')" class="btn btn-secondary btn-sm"/>
+						<input type="button" value="Registros Desativados" onClick="MostrarButton('registros_desativados', 'historico')" class="btn btn-danger btn-sm"/>
 					</div>
 				</div>
 			</aside>
@@ -67,10 +71,14 @@ if(!isset($_SESSION['usuarioId'])AND !isset($_SESSION['usuarioEmail'])AND !isset
 					</div>
 					
 					<div class="agenda">
-						<table class="table table-dark">
+						<table id="tabela" class="table table-dark table-hover">
+						<div class="form-group input-group">
+							<svg width="1em" height="1em"> </svg>
+							<input name="consulta" id="txt_consulta" placeholder="Pesquisar" type="text" class="form-control">
+						</div>
 							<tr>
 								<td>Data</td>
-								<td>Nome</td>
+								<td>Cliente</td>
 								<td>Funcionário</td>
 								<td>Serviço</td>
 								<td>Status</td>
@@ -85,6 +93,7 @@ if(!isset($_SESSION['usuarioId'])AND !isset($_SESSION['usuarioEmail'])AND !isset
 								 $funcionario = $coluna['nome_funcionario'];
 								 $status = $coluna['status_agenda'];
 								 $data = $coluna['data_agenda'];
+								 $data = date("d/m/Y",strtotime($data));
 								 $preco = $coluna['valor_ganho'];
 								echo"
 								<tr>
@@ -109,10 +118,14 @@ if(!isset($_SESSION['usuarioId'])AND !isset($_SESSION['usuarioEmail'])AND !isset
 						<div class="titu"> <b> REGISTRO DESATIVADOS </b> </div>
 					</div>
 					<div class="agenda">
-						<table class="table table-dark">
+					<table id="tabela" class="table table-dark table-hover">
+						<div class="form-group input-group">
+							<svg width="1em" height="1em"> </svg>
+							<input name="consulta" id="txt_consulta" placeholder="Pesquisar" type="text" class="form-control">
+						</div>
 							<tr>
 								<td>Data</td>
-								<td>Nome</td>
+								<td>Cliente</td>
 								<td>Funcionário</td>
 								<td>Serviço</td>
 								<td>Status</td>
@@ -126,7 +139,8 @@ if(!isset($_SESSION['usuarioId'])AND !isset($_SESSION['usuarioEmail'])AND !isset
 								 $servico = $coluna['tipo_servico'];
 								 $funcionario = $coluna['nome_funcionario'];
 								 $status = $coluna['status_agenda'];
-								 $data = $coluna['data_agenda'];
+								 $data = $coluna['data_agenda'];								 
+								 $data = date("d/m/Y",strtotime($data));
 								 $preco = $coluna['valor_ganho'];
 								echo"
 								<tr>
@@ -138,8 +152,6 @@ if(!isset($_SESSION['usuarioId'])AND !isset($_SESSION['usuarioEmail'])AND !isset
 									<td>$preco</td>
 								</tr>";
 								}
-
-
 							?>
 						</table>	
 				</section>

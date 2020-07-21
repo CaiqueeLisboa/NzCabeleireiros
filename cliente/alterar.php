@@ -38,17 +38,28 @@ if(!isset($_SESSION['usuarioId'])AND !isset($_SESSION['usuarioEmail'])AND !isset
 					$id_endereco = $coluna['id_endereco'];
 				}
 
-			$dados_end= mysqli_query($conn, "SELECT * FROM endereco where id_endereco= $id_endereco");
-				while($coluna = mysqli_fetch_array($dados_end)){ 
-					$id_endereco = $coluna['id_endereco'];
-					$cep = $coluna['cep'];
-					$rua = $coluna['rua'];
-					$numero = $coluna['numero'];
-					$complemento = $coluna['complemento'];
-					$bairro = $coluna['bairro'];
-					$cidade = $coluna['cidade'];
-					$estado = $coluna['estado'];
-				}
+			if($id_endereco == NULL || $id_endereco == 0){
+				$id_endereco = 0;
+				$cep = 0;
+				$rua = 0;
+				$numero = 0;
+				$complemento = 0;
+				$bairro = 0;
+				$cidade = 0;
+				$estado = 0;
+			}else{
+				$dados_end= mysqli_query($conn, "SELECT * FROM endereco where id_endereco= $id_endereco");
+					while($coluna = mysqli_fetch_array($dados_end)){ 
+						$id_endereco = $coluna['id_endereco'];
+						$cep = $coluna['cep'];
+						$rua = $coluna['rua'];
+						$numero = $coluna['numero'];
+						$complemento = $coluna['complemento'];
+						$bairro = $coluna['bairro'];
+						$cidade = $coluna['cidade'];
+						$estado = $coluna['estado'];
+					}
+			}
 			?>
 			<h1> Altere os dados </h1>
 			<form enctype="multipart/form-data" action="salvaralteracao.php?id_cliente=$id" name="form" method="POST" class="form-group"> 

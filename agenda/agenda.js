@@ -20,7 +20,7 @@ function validarForm(){
     }
 
     //if para verificar se todos os campos foram preenchidos
-    if(nome == '' || fixo == '' || celular == '' || servico == '' || dataAgenda == '' || 
+    if(nome == '' || celular == '' || servico == '' || dataAgenda == '' || 
     horario_inicio == '' || horario_termino == '' || funcionario == '' || valor == ''){
         //alert que exibe na tela para o usuário
         alert("Informe todos os campos");
@@ -28,7 +28,7 @@ function validarForm(){
         return false;
     }else{
         //if para verificar se o usuario não escreveu um telefone inválido
-        if(celular.length >= 13 || fixo.length >= 13 || fixo.length < 8 || celular.length < 9){
+        if(celular.length >= 13 || fixo.length >= 13 || celular.length < 9){
             //alert que exibe na tela para o usuário
             alert("O telefone deve possuir no minimo 8 carateres e no máximo 12 caracteres");
             //retorno em falso para o formulário não ser enviado para o backend
